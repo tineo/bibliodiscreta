@@ -113,7 +113,7 @@ class DefaultController extends Controller
                 ->getForm();
         }
 
-        return $this->render('default/ingresar.html.twig',['form' => $form->createView()] );
+        return $this->render('default/ingresar.html.twig',['form' => $form->createView(), 'dql' => ""] );
 
     }
 
@@ -122,6 +122,6 @@ class DefaultController extends Controller
      */
     public function aboutAction(Request $request)
     {
-        return $this->render('default/about.html.twig');
+        return $this->render('default/about.html.twig',[ 'dql' => "" ]);
     }
 }
