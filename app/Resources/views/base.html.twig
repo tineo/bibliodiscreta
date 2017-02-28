@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %} Busqueda de libros {% endblock %}</title>
+
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+
+
+        <!-- Latest compiled and minified CSS -->
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+
+        <script
+                src="https://code.jquery.com/jquery-3.1.1.js"
+                integrity="sha256-16cdPddA6VdVInumRGo6IbivbERE8p7CQR3HzTBuELA="
+                crossorigin="anonymous"></script>
+
+        <!-- Latest compiled and minified JavaScript -->
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+
+        <link rel="stylesheet" href="{{ asset('css/cover.css') }}" />
+        <style type="text/css">
+
+        </style>
+        {% block stylesheets %}{% endblock %}
+    </head>
+    <body>
+    <div class="site-wrapper">
+
+        <div class="site-wrapper-inner">
+
+            <div class="cover-container">
+
+                <div class="masthead clearfix">
+                    <div class="inner">
+
+                        <nav>
+                            <ul class="nav masthead-nav">
+                                <li {%  if app.request.attributes.get('_route') == 'homepage' %} class="active"{% endif %}>
+                                    <a href="{{ path('homepage') }}">Busqueda</a>
+                                </li>
+                                <li {%  if app.request.attributes.get('_route') == 'ingresar' %} class="active"{% endif %}>
+                                    <a href="{{ path('ingresar') }}">Ingreso</a>
+                                </li>
+                                <li {%  if app.request.attributes.get('_route') == 'about' %} class="active"{% endif %}>
+                                    <a href="{{ path('about') }}">Sobre esto</a>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                </div>
+
+                <div class="inner cover">
+
+                    {% block body %}{% endblock %}
+
+
+
+                </div>
+
+                <div class="mastfoot">
+                    <div class="inner">
+                        <p>{% if dql is not null %}<b>DQL: </b>{{ dql }}{% endif %}</p>
+                        <p>Redesign by
+                            <a href="https://twitter.com/itsudatte">@itsudatte</a>.</p>
+                    </div>
+
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+        {% block javascripts %}{% endblock %}
+    </body>
+</html>

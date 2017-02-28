@@ -1,0 +1,118 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+
+    <div class="panel panel-default">
+        <!-- Default panel contents -->
+        <div class="panel-heading">Datos del nuevo libro</div>
+        <div class="panel-body">
+
+
+            {{ form_start(form) }}
+
+            <div class="input-group">
+
+                <span class="input-group-addon " id="sizing-addon1">
+                    <span class="glyphicon glyphicon-book"></span>
+                </span>
+
+                {{ form_widget(form.codigo,
+                { 'attr': {
+                    'class': 'form-control',
+                    'placeholder': 'Codigo',
+                    'aria-describedby': 'sizing-addon1',
+                    'name': 'codigo',
+                } }) }}
+            </div>
+
+            <br />
+
+            <div class="input-group">
+
+                <span class="input-group-addon " id="sizing-addon1">
+                    <span class="glyphicon glyphicon-book"></span>
+                </span>
+
+                {{ form_widget(form.nombre,
+                { 'attr': {
+                    'class': 'form-control',
+                    'placeholder': 'Nombre',
+                    'aria-describedby': 'sizing-addon1',
+                    'name': 'nombre',
+                } }) }}
+
+            </div>
+
+            <br />
+
+            <div class="input-group">
+
+                <span class="input-group-addon " id="sizing-addon1">
+                    <span class="glyphicon glyphicon-book"></span>
+                </span>
+
+                {{ form_widget(form.autor,
+                { 'attr': {
+                    'class': 'form-control',
+                    'placeholder': 'Autor',
+                    'aria-describedby': 'sizing-addon1',
+                    'name': 'autor',
+                } }) }}
+
+            </div>
+
+            <br />
+
+            <div class="input-group">
+
+                <span class="input-group-addon " id="sizing-addon1">
+                    <span class="glyphicon glyphicon-book"></span>
+                </span>
+
+                {{ form_widget(form.editorial,
+                { 'attr': {
+                    'class': 'form-control',
+                    'placeholder': 'Editorial',
+                    'aria-describedby': 'sizing-addon1',
+                    'name': 'editorial',
+                } }) }}
+
+            </div>
+
+            <br />
+
+            <div class="input-group">
+
+                <span class="input-group-addon " id="sizing-addon1">
+                    <span class="glyphicon glyphicon-book"></span>
+                </span>
+
+                {{ form_widget(form.pais,
+                { 'attr': {
+                    'class': 'form-control',
+                    'placeholder': 'Pais',
+                    'aria-describedby': 'sizing-addon1',
+                    'name': 'pais',
+                } }) }}
+
+            </div>
+
+            <br />
+            <div class="btn-group">
+                
+
+                {{ form_widget(form.save,
+                { 'attr': {
+                    'class': 'btn btn-default dropdown-toggle',
+                    'aria-haspopup': 'true',
+                    'aria--expanded': 'false',
+                    'name': 'pais',
+                } }) }}
+            </div>
+
+                {{ form_end(form) }}
+
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,170 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+        <div class="panel panel-default">
+            <!-- Default panel contents -->
+            <!--<div class="panel-heading">Panel heading</div>-->
+            <div class="panel-body">
+                <form method="get" id="busqueda">
+                    <div class="input-group input-group-lg">
+                        <span class="input-group-addon " id="sizing-addon1">
+                            <span class="glyphicon glyphicon-book"></span>
+                        </span>
+                        <input type="text"
+                               class="form-control"
+                               placeholder="Ingresa termino"
+                               aria-describedby="sizing-addon1"
+                               name="keyword"
+                               value="{{ app.request.get('keyword') }}"
+                                    />
+                    </div>
+
+                    <div style="float: right; margin-bottom: -15px">
+                        <a href="#" style="color: #999999" id="morefilters">+ Mas filtros </a>
+                    </div>
+
+                    <div id="filters"
+
+                    {% if app.request.get('codigo') == 1 or
+                    app.request.get('nombre') == 1 or
+                    app.request.get('autor') == 1 or
+                    app.request.get('editorial') == 1 or
+                    app.request.get('pais') == 1 %}{% else %}
+                        style="display:none;"
+                    {% endif %}
+                    >
+                        <input type="checkbox" name="codigo" id="codigo" value="1" {% if app.request.get('codigo') == 1 %}checked{% endif %}>
+                        <label for="codigo">Codigo</label>
+                        <input type="checkbox" name="nombre" id="nombre" value="1" {% if app.request.get('nombre') == 1 %}checked{% endif %}>
+                        <label for="nombre">Nombre</label>
+                        <input type="checkbox" name="autor" id="autor" value="1" {% if app.request.get('autor') == 1 %}checked{% endif %}>
+                        <label for="autor">Autor</label>
+                        <input type="checkbox" name="editorial" id="editorial" value="1" {% if app.request.get('editorial') == 1 %}checked{% endif %}>
+                        <label for="editorial">Editorial</label>
+                        <input type="checkbox" name="pais" id="pais" value="1" {% if app.request.get('pais') == 1 %}checked{% endif %}>
+                        <label for="pais">Pais</label>
+                    </div>
+
+                    
+                </form>
+
+
+                            {#
+                                {{ form_start(form) }}
+
+                                <div class="input-group input-group-lg">
+
+                                <span class="input-group-addon " id="sizing-addon1">
+                                    <span class="glyphicon glyphicon-book"></span>
+                                </span>
+
+                                {{ form_widget(form.keyword,
+                                { 'attr': {
+                                    'class': 'form-control',
+                                    'placeholder': 'Ingresa termino',
+                                    'aria-describedby': 'sizing-addon1',
+                                    'name': 'keyword',
+                                } }) }}
+
+                                </div>
+
+                                {{ form_end(form) }}
+                            #}
+            </div>
+        </div>
+
+
+        {% if app.request.get('keyword') is not null %}
+
+            <div class="panel panel-default">
+                <!-- Default panel contents -->
+                <div class="panel-heading">Resultados de busqueda</div>
+                <div class="panel-body">
+                    <p>Resultados de temino: <b>{{ app.request.get('keyword') }}</b></p>
+                </div>
+
+                <!-- Table -->
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>Codigo</th>
+                        <th>Nombre de libro</th>
+                        <th>Autor</th>
+                        <th>Editorial</th>
+                        <th>Pais</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for libro in libros %}
+                        <tr>
+                            <td>{{ libro.codigo }}</td>
+                            <td>{{ libro.nombre }}</td>
+                            <td>{{ libro.autor }}</td>
+                            <td>{{ libro.editorial }}</td>
+                            <td>{{ libro.pais }}</td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="5" style="text-align: center; padding: 50px 0;">
+                                No se encontraron resultados
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+
+
+            </div>
+
+
+        {% endif %}
+
+
+
+
+{% endblock %}
+
+{% block stylesheets %}
+
+{% endblock %}
+
+{% block javascripts %}
+
+    <script type="text/javascript">
+        $(function () {
+           $("#morefilters").click(function () {
+                $("#filters").show();
+                $("#codigo").attr("checked","checked");
+           });
+        });
+
+
+        $("#busqueda").submit(function(e){
+            if($("#codigo").prop('checked') ||
+            $("#nombre").prop('checked') ||
+            $("#autor").prop('checked') ||
+            $("#editorial").prop('checked') ||
+            $("#pais").prop('checked') ){
+                return true;
+            }else{
+
+                if($("#filters").css('display') != 'none'){
+                    alert("seleccionar al menos una casilla");
+                    return false;
+                }else{
+                    return true;
+                }
+            }
+
+
+            //console.log($("#codigo").prop('checked'));
+            //console.log($("#nombre").prop('checked'));
+            //console.log($("#autor").prop('checked'));
+            //console.log($("#editorial").prop('checked'));
+            //console.log($("#pais").prop('checked'));
+
+        });
+
+    </script>
+{% endblock %}
