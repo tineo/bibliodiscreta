@@ -1,11 +1,14 @@
 imports:
     - { resource: config.yml }
 
-#doctrine:
+doctrine:
 #    orm:
 #        metadata_cache_driver: apc
 #        result_cache_driver: apc
 #        query_cache_driver: apc
+    dbal:
+#        url: "%env(DATABASE_URL)%"
+        url: "%env(CLEARDB_DATABASE_URL)%"
 
 monolog:
     handlers:
@@ -15,7 +18,8 @@ monolog:
             handler:      nested
         nested:
             type:  stream
-            path:  "%kernel.logs_dir%/%kernel.environment%.log"
+#            path:  "%kernel.logs_dir%/%kernel.environment%.log"
+            path:  "php://stderr"
             level: debug
         console:
             type:  console
